@@ -338,8 +338,12 @@
     return this;
   };
 
-  (typeof module !== 'undefined' && module.exports) ?
-    (module.exports = bean) :
-    (context['bean'] = bean);
+  if (typeof define === 'function') {
+    define(bean);
+  } else if (typeof module !== 'undefined' && module.exports) {
+    module.exports = bean;
+  } else {
+    context['bean'] = bean;
+  }
 
 }(this);
